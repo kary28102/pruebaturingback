@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.auth import require_admin
 from app.database import get_db
 from app.models.personaje import Personaje
 from app.schemas.personaje import (
@@ -43,6 +44,7 @@ def obtener_personaje(
 def crear_personaje(
     personaje: PersonajeCreate,
     db: Session = Depends(get_db),
+    _: object = Depends(require_admin),
 ):
     nuevo_personaje = Personaje(**personaje.model_dump())
 
@@ -58,6 +60,7 @@ def actualizar_personaje(
     personaje_id: int,
     datos: PersonajeUpdate,
     db: Session = Depends(get_db),
+    _: object = Depends(require_admin),
 ):
     personaje = db.query(Personaje).filter(
         Personaje.id == personaje_id
@@ -82,6 +85,7 @@ def actualizar_personaje(
 def eliminar_personaje(
     personaje_id: int,
     db: Session = Depends(get_db),
+    _: object = Depends(require_admin),
 ):
     personaje = db.query(Personaje).filter(
         Personaje.id == personaje_id

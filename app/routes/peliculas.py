@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
+from app.auth import require_admin
 from app.database import get_db
 from app.models.pelicula import Pelicula
 from app.schemas.pelicula import (
@@ -48,7 +49,8 @@ def obtener_pelicula(
 @router.post("/", response_model=PeliculaResponse)
 def crear_pelicula(
     pelicula: PeliculaCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _: object = Depends(require_admin),
 ):
 
     nueva_pelicula = Pelicula(
@@ -67,7 +69,8 @@ def crear_pelicula(
 def actualizar_pelicula(
     pelicula_id: int,
     datos: PeliculaUpdate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _: object = Depends(require_admin),
 ):
 
     pelicula = db.query(Pelicula).filter(
@@ -93,7 +96,8 @@ def actualizar_pelicula(
 @router.delete("/{pelicula_id}")
 def eliminar_pelicula(
     pelicula_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    _: object = Depends(require_admin),
 ):
 
     pelicula = db.query(Pelicula).filter(
