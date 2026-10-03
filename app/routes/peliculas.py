@@ -83,7 +83,7 @@ def actualizar_pelicula(
             detail="Película no encontrada"
         )
 
-    for campo, valor in datos.model_dump().items():
+    for campo, valor in datos.model_dump(exclude_unset=True).items():
         setattr(pelicula, campo, valor)
 
     db.commit()

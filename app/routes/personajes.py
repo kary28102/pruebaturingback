@@ -72,7 +72,7 @@ def actualizar_personaje(
             detail="Personaje no encontrado",
         )
 
-    for campo, valor in datos.model_dump().items():
+    for campo, valor in datos.model_dump(exclude_unset=True).items():
         setattr(personaje, campo, valor)
 
     db.commit()

@@ -17,8 +17,15 @@ class PeliculaCreate(PeliculaBase):
     pass
 
 
-class PeliculaUpdate(PeliculaBase):
-    pass
+class PeliculaUpdate(BaseModel):
+    titulo: Optional[str] = None
+    descripcion: Optional[str] = None
+    genero: Optional[str] = None
+    anio: Optional[int] = None
+    director: Optional[str] = None
+    duracion: Optional[int] = None
+    imagen: Optional[str] = None
+    calificacion: Optional[float] = None
 
 
 class PeliculaResponse(PeliculaBase):

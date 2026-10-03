@@ -13,8 +13,11 @@ class PersonajeCreate(PersonajeBase):
     pass
 
 
-class PersonajeUpdate(PersonajeBase):
-    pass
+class PersonajeUpdate(BaseModel):
+    nombre: Optional[str] = None
+    descripcion: Optional[str] = None
+    imagen: Optional[str] = None
+    pelicula_id: Optional[int] = None
 
 
 class PersonajeResponse(PersonajeBase):
