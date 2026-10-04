@@ -74,13 +74,26 @@ def actualizar_usuario(
     usuario_id: int,
     datos: UsuarioUpdate,
     db: Session = Depends(get_db),
-    _: Usuario = Depends(require_admin),
+    usuario_actual: Usuario = Depends(get_current_user),
 ):
+    if usuario_actual.rol != "admin" and usuario_actual.id != usuario_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Solo puedes modificar tu propio perfil",
+        )
+
     usuario = db.query(Usuario).filter(Usuario.id == usuario_id).first()
     if not usuario:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
 
-    for campo, valor in datos.model_dump(exclude_unset=True).items():
+    cambios = datos.model_dump(exclude_unset=True)
+    if usuario_actual.rol != "admin" and cambios.get("rol") == "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="No puedes asignarte el rol de administrador",
+        )
+
+    for campo, valor in cambios.items():
         if campo == "password":
             valor = hash_password(valor)
         setattr(usuario, campo, valor)
