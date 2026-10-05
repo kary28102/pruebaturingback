@@ -6,7 +6,7 @@ from pydantic import BaseModel, EmailStr, Field
 class UsuarioCreate(BaseModel):
     nombre: str
     email: EmailStr
-    password: str = Field(min_length=6)
+    password: str = Field(min_length=8)
 
 
 class LoginRequest(BaseModel):
@@ -21,7 +21,7 @@ class UsuarioAdminCreate(UsuarioCreate):
 class UsuarioUpdate(BaseModel):
     nombre: str | None = None
     email: EmailStr | None = None
-    password: str | None = Field(default=None, min_length=6)
+    password: str | None = Field(default=None, min_length=8)
     rol: Literal["admin", "user"] | None = None
 
 

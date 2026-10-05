@@ -1,0 +1,162 @@
+# Backend – API REST
+
+Backend desarrollado en **Python** para proporcionar una API REST que permite gestionar la información de la aplicación y establecer la comunicación con el Frontend desarrollado en React.
+
+## Tecnologías utilizadas
+
+* **Python**
+* **FastAPI**
+* **Uvicorn**
+* **Base de datos SQL**
+* **Git / GitHub**
+* **Postman** 
+
+## Requisitos
+
+Antes de ejecutar el proyecto es necesario contar con:
+
+* Python
+* Git
+
+Para verificar la instalación de Python:
+
+```bash
+python --version
+```
+
+Para verificar pip:
+
+```bash
+pip --version
+```
+
+
+### Crear un entorno virtual
+
+Windows:
+
+```bash
+python -m venv venv
+```
+
+### 3. Activar el entorno virtual
+
+En Windows PowerShell:
+
+```bash
+.\venv\Scripts\Activate.ps1
+```
+
+En Windows CMD:
+
+```bash
+venv\Scripts\activate
+```
+
+Una vez activado, aparecerá `(venv)` al inicio de la terminal.
+
+### 4. Instalar dependencias
+
+Instalar las dependencias del proyecto:
+
+```bash
+pip install -r requirements.txt
+```
+
+Si el archivo `requirements.txt` no existe, las dependencias principales pueden instalarse con:
+
+```bash
+pip install fastapi uvicorn
+```
+
+## Ejecución del proyecto
+
+Con el entorno virtual activado, ejecutar:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Si el archivo `main.py` se encuentra directamente en la raíz del proyecto:
+
+```bash
+uvicorn main:app --reload
+```
+
+La API estará disponible normalmente en:
+
+```text
+http://127.0.0.1:8000
+```
+
+
+## Seguridad
+
+Se consideran medidas básicas de seguridad dentro de la API:
+
+* Validación de los datos recibidos.
+* Manejo adecuado de errores.
+* Uso de códigos de estado HTTP apropiados.
+
+
+## Integración con el Frontend
+
+El Backend proporciona los servicios que consume el Frontend desarrollado con React.
+
+
+## Comandos principales
+
+Activar entorno virtual:
+
+```bash
+.\venv\Scripts\Activate.ps1
+```
+
+Instalar dependencias:
+
+```bash
+pip install -r requirements.txt
+```
+
+Ejecutar servidor:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Desactivar entorno virtual:
+
+```bash
+deactivate
+```
+
+## Solución de problemas
+
+### El comando `uvicorn` no es reconocido
+
+Verificar que el entorno virtual esté activado:
+
+```bash
+.\venv\Scripts\Activate.ps1
+```
+
+Después instalar Uvicorn:
+
+```bash
+pip install uvicorn
+```
+
+### Error de dependencias
+
+Actualizar las dependencias:
+
+```bash
+pip install -r requirements.txt
+```
+
+
+## Autor
+
+**Ninfa Yukary Hernandez Vargas**
+
+Backend desarrollado como parte de una prueba técnica de desarrollo de software.
